@@ -1,36 +1,43 @@
 content:
-  - name: home
-    label: Home Page
+  - name: button_config
+    label: Button Configuration
     type: file
-    path: index.md
-    format: yaml-frontmatter
+    path: button.yml
+    format: yaml
     fields:
       - name: buttons
         label: Buttons
-        description: Daftar button yang bisa di-add, edit, atau delete. Class untuk styling brand (dari css/brands.css).
         type: object
-        list:
-          min: 0  # Minimal 0 button (bisa kosong)
-          max: 20  # Maksimal 20 button
-          collapsible:
-            collapsed: true
-            summary: "{text} ({index})"  # Summary collapsible untuk setiap item
+        list: true
         fields:
-          - name: text
-            label: Text Button
-            type: text
+          - name: name
+            label: Button Name
+            type: string
             required: true
-            description: Teks yang tampil di button.
           - name: url
             label: URL
-            type: text
+            type: string
             required: true
-            pattern:
-              regex: '^https?://'
-              message: 'Harus URL valid dimulai dengan http:// atau https://'
-            description: Link tujuan button.
-          - name: class
-            label: Class Styling
-            type: text
-            description: Class CSS untuk brand (e.g., button-twitter). Kosongkan jika custom.
-            default: ""
+            pattern: { regex: '^https?://.*', message: 'Must be a valid URL' }
+          - name: icon_class
+            label: Icon Class
+            type: string
+            default: "default-icon"
+      - name: button_stack
+        label: Button Stack
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Button Name
+            type: string
+            required: true
+          - name: url
+            label: URL
+            type: string
+            required: true
+            pattern: { regex: '^https?://.*', message: 'Must be a valid URL' }
+          - name: icon_class
+            label: Icon Class
+            type: string
+            default: "default-icon"

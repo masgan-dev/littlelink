@@ -1,36 +1,30 @@
-content:
-  - name: home
-    label: Home Page
-    type: file
-    path: index.md
-    format: yaml-frontmatter
-    fields:
-      - name: buttons
-        label: Buttons
-        description: Daftar button yang bisa di-add, edit, atau delete. Class untuk styling brand (dari css/brands.css).
-        type: object
-        list:
-          min: 0  # Minimal 0 button (bisa kosong)
-          max: 20  # Maksimal 20 button
-          collapsible:
-            collapsed: true
-            summary: "{text} ({index})"  # Summary collapsible untuk setiap item
-        fields:
-          - name: text
-            label: Text Button
-            type: text
-            required: true
-            description: Teks yang tampil di button.
-          - name: url
-            label: URL
-            type: text
-            required: true
-            pattern:
-              regex: '^https?://'
-              message: 'Harus URL valid dimulai dengan http:// atau https://'
-            description: Link tujuan button.
-          - name: class
-            label: Class Styling
-            type: text
-            description: Class CSS untuk brand (e.g., button-twitter). Kosongkan jika custom.
-            default: ""
+{
+  "collections": [
+    {
+      "name": "Buttons",
+      "label": "Buttons List",
+      "file": "index.html",
+      "selector": ".button-stack .button",
+      "fields": [
+        {
+          "name": "link",
+          "label": "Link URL",
+          "type": "attribute",
+          "attribute": "href"
+        },
+        {
+          "name": "label",
+          "label": "Button Name",
+          "type": "text"
+        },
+        {
+          "name": "brand",
+          "label": "Brand Class",
+          "type": "attribute",
+          "attribute": "class"
+        }
+      ],
+      "actions": ["add", "edit", "delete"]
+    }
+  ]
+}

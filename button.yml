@@ -1,0 +1,8 @@
+buttons:
+  - name: Instagram
+    url: https://instagram.com/yourusername
+    class: button-instagram
+  - name: Twitter
+    url: https://twitter.com/yourusername
+    class: button-twitter
+  # Tambah lebih banyak sesuai kebutuhan

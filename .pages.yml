@@ -1,28 +1,36 @@
-# .pages.yml - Konfigurasi untuk PagesCMS di repo LittleLink
-
-# Bagian media: Untuk mengelola file gambar/logo di folder 'images'
-media:
-  input: images  # Path ke folder di repo (asumsi ada folder 'images')
-  output: /images  # Prefix URL untuk akses di situs
-  categories: [image]  # Kategori file (hanya gambar)
-  extensions: [png, jpg, jpeg, svg, gif]  # Ekstensi yang diizinkan
-
-# Bagian content: Definisi file yang bisa diedit
 content:
-  - name: homepage  # Nama internal unik
-    label: Halaman Utama  # Label yang tampil di UI PagesCMS
-    type: file  # Tipe: file tunggal (bukan koleksi)
-    path: index.html  # Path ke file di repo
-    format: code  # Format editor: code (untuk edit HTML sebagai teks)
-    fields: []  # Tidak ada fields struktural; edit bebas sebagai kode
-
-  - name: brands_css  # Nama internal unik
-    label: Style Tombol Branded  # Label di UI
+  - name: home
+    label: Home Page
     type: file
-    path: css/brands.css  # Path ke file CSS
-    format: code  # Edit sebagai kode CSS
-
-# Bagian settings: Opsional, untuk kontrol global
-settings:
-  content:
-    merge: true  # Gabungkan perubahan dengan konten existing saat save (hindari overwrite total)
+    path: index.md
+    format: yaml-frontmatter
+    fields:
+      - name: buttons
+        label: Buttons
+        description: Daftar button yang bisa di-add, edit, atau delete. Class untuk styling brand (dari css/brands.css).
+        type: object
+        list:
+          min: 0  # Minimal 0 button (bisa kosong)
+          max: 20  # Maksimal 20 button
+          collapsible:
+            collapsed: true
+            summary: "{text} ({index})"  # Summary collapsible untuk setiap item
+        fields:
+          - name: text
+            label: Text Button
+            type: text
+            required: true
+            description: Teks yang tampil di button.
+          - name: url
+            label: URL
+            type: text
+            required: true
+            pattern:
+              regex: '^https?://'
+              message: 'Harus URL valid dimulai dengan http:// atau https://'
+            description: Link tujuan button.
+          - name: class
+            label: Class Styling
+            type: text
+            description: Class CSS untuk brand (e.g., button-twitter). Kosongkan jika custom.
+            default: ""

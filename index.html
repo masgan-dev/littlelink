@@ -99,27 +99,49 @@
 	
       </div>
 
-	<audio id="bg-music" src="song/Californication.mp3" loop></audio>
+	<audio id="bg-music"></audio>
+
 <script>
 window.addEventListener('DOMContentLoaded', function() {
-  var audio = document.getElementById('bg-music');
+  // Daftar lagu (bebas ditambah)
+  const playlist = [
+    'song/Californication.mp3',
+    'song/Otherside.mp3',
+    // Tambahkan lebih banyak lagu di sini, contoh:
+    // 'song/DaniCalifornia.mp3',
+    // 'song/Snow.mp3'
+  ];
+
+  let currentTrack = 0;
+  const audio = document.getElementById('bg-music');
+  audio.src = playlist[currentTrack];
+
   function playMusic() {
     audio.play().catch(function(){});
   }
 
-  // Coba autoplay langsung
+  // Play otomatis (bandel ke autoplay policy jika browser mengizinkan)
   playMusic();
 
-  // Trig autoplay saat ada interaksi nyata user
-  window.addEventListener('click', playMusic, { once: true });        // Mouse/tap
-  window.addEventListener('scroll', playMusic, { once: true });      // Scroll event
-  window.addEventListener('touchstart', playMusic, { once: true });  // Mulai swipe/sentuh di HP
-  window.addEventListener('touchmove', playMusic, { once: true });   // Geser layar di HP
-  window.addEventListener('pointerdown', playMusic, { once: true }); // Interaksi pointer
-  window.addEventListener('keydown', playMusic, { once: true });     // Keyboard
-  window.addEventListener('wheel', playMusic, { once: true });       // Scroll pakai mouse/trackpad
+  // Trig jika interaksi (semua event yang pernah kita pasang sebelumnya!)
+  window.addEventListener('click', playMusic, { once: true });
+  window.addEventListener('scroll', playMusic, { once: true });
+  window.addEventListener('touchstart', playMusic, { once: true });
+  window.addEventListener('touchmove', playMusic, { once: true });
+  window.addEventListener('pointerdown', playMusic, { once: true });
+  window.addEventListener('keydown', playMusic, { once: true });
+  window.addEventListener('wheel', playMusic, { once: true });
+
+  // Event saat lagu selesai: mainkan lagu selanjutnya, lalu loop playlist balik ke awal
+  audio.addEventListener('ended', function() {
+    currentTrack++;
+    if (currentTrack >= playlist.length) currentTrack = 0; // loop ke awal
+    audio.src = playlist[currentTrack];
+    audio.play().catch(function(){});
+  });
 });
 </script>
+
 
 
 

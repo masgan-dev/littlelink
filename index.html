@@ -101,20 +101,28 @@
 
 	<audio id="bg-music" src="song/Californication.mp3" loop></audio>
 <script>
+<script>
 window.addEventListener('DOMContentLoaded', function() {
   var audio = document.getElementById('bg-music');
-  // Untuk autoplay di Chrome/Safari, harus ada interaksi user, jadi bisa memakai onload dan on click sekaligus
+
   function playMusic() {
     audio.play().catch(function(){});
   }
 
-  // Coba mainkan langsung (kadang gagal jika belum ada interaksi)
+  // Coba langsung autoplay (jika browser memperbolehkan)
   playMusic();
 
-  // Jika gagal di awal, mainkan setelah klik di mana saja
+  // Mainkan saat klik pertama
   document.body.addEventListener('click', playMusic, { once: true });
+
+  // Mainkan saat scroll pertama
+  window.addEventListener('scroll', playMusic, { once: true });
+  
+  document.body.addEventListener('touchstart', playMusic, { once: true });
+
 });
 </script>
+
 
 	
 </body>

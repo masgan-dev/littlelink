@@ -96,13 +96,26 @@
 				</a>	
 			<!-- Google Drive -->
               <a class="button button-google-black" href="https://drive.google.com/drive/folders/1gZy5fKrRUNli84GcjSLNwll_lMMhZW2S" target="_blank" rel="noopener" role="button"><img class="icon" aria-hidden="true" src="images/icons/google-drive.svg" alt="Google Drive Logo">File Riset Investasi</a>	
-			<audio controls autoplay loop>
-        <source src="song/Californication.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+	
       </div>
 
-	
+	<audio id="bg-music" src="song/Californication.mp3" loop></audio>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('bg-music');
+  // Untuk autoplay di Chrome/Safari, harus ada interaksi user, jadi bisa memakai onload dan on click sekaligus
+  function playMusic() {
+    audio.play().catch(function(){});
+  }
+
+  // Coba mainkan langsung (kadang gagal jika belum ada interaksi)
+  playMusic();
+
+  // Jika gagal di awal, mainkan setelah klik di mana saja
+  document.body.addEventListener('click', playMusic, { once: true });
+});
+</script>
+
 	
 </body>
 </html>

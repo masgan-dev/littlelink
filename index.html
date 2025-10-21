@@ -108,19 +108,19 @@ window.addEventListener('DOMContentLoaded', function() {
     audio.play().catch(function(){});
   }
 
-  // Coba langsung autoplay (jika browser memperbolehkan)
+  // Coba autoplay langsung
   playMusic();
 
-  // Mainkan saat klik pertama
+  // Trig semua cara interaksi user (hanya sekali saja per event)
   document.body.addEventListener('click', playMusic, { once: true });
-
-  // Mainkan saat scroll pertama
   window.addEventListener('scroll', playMusic, { once: true });
-  
   document.body.addEventListener('touchstart', playMusic, { once: true });
-
+  document.body.addEventListener('touchmove', playMusic, { once: true });
+  document.body.addEventListener('pointerdown', playMusic, { once: true });
+  document.body.addEventListener('keydown', playMusic, { once: true });
 });
 </script>
+
 
 
 	

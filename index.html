@@ -103,7 +103,6 @@
 <script>
 window.addEventListener('DOMContentLoaded', function() {
   var audio = document.getElementById('bg-music');
-
   function playMusic() {
     audio.play().catch(function(){});
   }
@@ -111,15 +110,17 @@ window.addEventListener('DOMContentLoaded', function() {
   // Coba autoplay langsung
   playMusic();
 
-  // Trig semua cara interaksi user (hanya sekali saja per event)
-  document.body.addEventListener('click', playMusic, { once: true });
-  window.addEventListener('scroll', playMusic, { once: true });
-  document.body.addEventListener('touchstart', playMusic, { once: true });
-  document.body.addEventListener('touchmove', playMusic, { once: true });
-  document.body.addEventListener('pointerdown', playMusic, { once: true });
-  document.body.addEventListener('keydown', playMusic, { once: true });
+  // Trig autoplay saat ada interaksi nyata user
+  window.addEventListener('click', playMusic, { once: true });        // Mouse/tap
+  window.addEventListener('scroll', playMusic, { once: true });      // Scroll event
+  window.addEventListener('touchstart', playMusic, { once: true });  // Mulai swipe/sentuh di HP
+  window.addEventListener('touchmove', playMusic, { once: true });   // Geser layar di HP
+  window.addEventListener('pointerdown', playMusic, { once: true }); // Interaksi pointer
+  window.addEventListener('keydown', playMusic, { once: true });     // Keyboard
+  window.addEventListener('wheel', playMusic, { once: true });       // Scroll pakai mouse/trackpad
 });
 </script>
+
 
 
 

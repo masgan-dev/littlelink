@@ -97,6 +97,31 @@
 			
       </div>
 
+
+    <h1>Sequential Audio Playlist</h1>
+    <audio autoplay onended="playNext()">
+        <source src="song/Californication.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio>
+        <source src="song/Otherside.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function playNext() {
+            const audios = document.querySelectorAll('audio');
+            for (let i = 0; i < audios.length - 1; i++) {
+                if (audios[i].ended) {
+                    audios[i + 1].play();
+                    break;
+                }
+            }
+        }
+    </script>
+	
+</body>
+</html>
    
 
     </div>
